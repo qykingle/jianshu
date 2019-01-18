@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
+import { Link, withRouter } from 'react-router-dom'
 import {
   HeaderWrapper,
   Logo,
@@ -59,7 +60,9 @@ class Header extends Component {
     const { focused, handleInputFocus, handleInputBlur, list } = this.props
     return (
       <HeaderWrapper>
-        <Logo />
+        <Link to='/'>
+          <Logo />
+        </Link>
         <Nav>
           <NavItem className='left active'>首页</NavItem>
           <NavItem className='left'>下载App</NavItem>
@@ -193,4 +196,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+// withRouter 让动态路由参数能够传到Header组件（在动态加载组件的时候用到，即loadable.js）
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
